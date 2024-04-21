@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/formLogin.css" media="all">
+  <title>Formulário de Login</title>
+  <script src="/javascripts/botaoBack.js" defer></script>
+  <script type="module" defer>
+  import Window from "/javascripts/window.js";
+    const state = "<%= err %>";
+    if(state == "safe!") {
+      const config = {
+        header_content:"Sucesso!",
+        main_content:"Faça Login para entrar no sistema!",
+        color:"#84d45c"
+      }
+      Window.config(config);
+      Window.exibir();
+    }else if(state == "error!") {
+      const config = {
+        header_content:"Erro!",
+        main_content:"Usuário ou senha incorretos!",
+        color:"#f67070"
+      }
+      Window.config(config);
+      Window.exibir();
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <button onclick="back()">Voltar</button>
+    <div class="formulario">
+      <div class="form-titulo">
+        <h1>Login</h1>
+      </div>
+    <div class="form-content">
+      <br/>
+        <form action="/main" method="POST">
+          <input type="text" class="inputForm" id="nomeUsuario" name="nomeUsuario" placeholder="nome de usuário" required><br><br>
+          <input type="password" class="inputForm" id="senha" name="senha" placeholder="informe a sua senha" required><br><br>
+          <div class="botoes">
+            <button type="reset" class="botaoForm" id="botaoReset">Limpar</button>
+          <button type="submit" class="botaoForm" id="botaoReset">Enviar</button>
+          </div>
+        </form>
+        <br/>
+    </div>
+    <div class="form-footer">
+      <h1>Login</h1>
+    </div>
+    </div>
+  </div>
+</body>
+</html>

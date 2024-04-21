@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/formCadastro.css" media="all">
+  <title>Formulário de Cadastro</title>
+  <script src="/javascripts/botaoBack.js" defer></script>
+  <script type="module" defer>
+    import Window from "/javascripts/window.js";
+    const state = "<%= err %>";
+    if(state) {
+      const config = {
+        header_content: "Erro!",
+        main_content: "<%= err %>",
+        color: "#f67070",
+      }
+    Window.config(config);
+    Window.exibir();
+    }else if(state == "erro de senha!") {
+      const config = {
+        header_content: "Erro!",
+        main_content: "as senhas não correspondem!",
+        color: "#f67070"
+      }
+    Window.config(config);
+    Window.exibir();
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <button onclick="back()">Voltar</button>
+    <div class="formulario">
+      <div class="form-titulo">
+        <h1>Cadastro</h1>
+      </div>
+      <br />
+    <div class="form-content">
+      <form action="/formLogin" method="POST">
+        <input type="text" class="inputForm" id="nomeCompleto" name="nomeCompleto" placeholder="nome completo" required><br><br>
+        <input type="text" class="inputForm" id="nomeUsuario" name="nomeUsuario" placeholder="nome de usuário" required><br><br>
+        <div class="radios">
+          <h3>Gênero</h3><div class="radio_area">
+            <span class="radio"><input type="radio" class="inputForm" id="genero-m" value="Masculino" name="genero" required><h5>Masculino</h5></span><span class="radio"><input type="radio" class="inputForm" id="genero-f" value="Feminino" name="genero" required><h5>Feminino</h5></span>
+          </div>
+        </div>
+        <br>
+        <input type="number" class="inputForm" id="idade" name="idade" placeholder="idade" required><br><br>
+        <input type="email" class="inputForm" id="email" name="email" placeholder="exemplo@gmail.com" required><br><br>
+        <input type="password" class="inputForm" id="senha" name="senha" placeholder="crie uma senha" required><br><br>
+        <input type="password" class="inputForm" id="c-senha" name="c_senha" placeholder="confirme a sua senha" required><br><br>
+        <div class="botoes">
+          <button type="reset" class="botaoForm" id="botaoReset">Limpar</button>
+          <button type="submit" class="botaoForm" id="botaoReset">Enviar</button>
+        </div>
+      </form>
+    </div>
+    <br />
+  <div class="form-footer">
+    <h1>Cadastro</h1>
+  </div>
+</div>
+</div>
+</body>
+</html>

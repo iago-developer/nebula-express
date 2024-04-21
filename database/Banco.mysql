@@ -1,0 +1,13 @@
+#Criação do Banco de Dados
+CREATE DATABASE Banco;
+
+#Criação da tabela dos usuários
+CREATE TABLE usuarios(
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE,
+ nomeCompleto VARCHAR(245) NOT NULL,
+ nomeUsuario VARCHAR(245) NOT NULL UNIQUE,
+ idade INT NOT NULL,
+ genero ENUM('Masculino', 'Feminino'),
+ email VARCHAR(245) NOT NULL UNIQUE,
+ senha VARCHAR(245) NOT NULL
+);
