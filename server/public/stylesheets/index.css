@@ -21,22 +21,35 @@ a {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-rows: 1fr 70px;
+  grid-template-rows: 80px 1fr 70px;
 }
 
 .container > .header-content {
+  background-color: #252525;
   color: #fff;
   height: 100%;
   width: 100%;
+  font-size: 1rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 .container > .header-content > h1 {
+  padding-left: 10px;
   text-shadow: 1px 2px 2px #000;
   letter-spacing: 1.5px;
+}
+.container > .header-content > nav > a {
+  padding: 14px;
+  padding-right: 3px;
+  letter-spacing: 1.5px;
+  color: #fff;
+  text-decoration: none;
+}
+.container > .header-content > nav > a:hover {
+  text-decoration: underline;
 }
 
 .container > .header-content > .links {
@@ -60,7 +73,10 @@ a {
   color: #00B7FF;
   text-decoration: underline;
 }
-
+.container > .main-content > iframe {
+  height: 100%;
+  width: 100%;
+}
 .container > .footer-content {
   width: 100%;
   display: flex;
@@ -76,5 +92,28 @@ a {
 
 .container > .footer-content > p > a:hover {
   color: #00B7FF;
+  text-decoration: underline;
+}
+
+.container > .footer-content {
+  background-color: #252525;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container > .footer-content > p > a {
+  color: #fff;
+  text-decoration: none;
+  transition: all .6s;
+}
+
+.container > .footer-content > p > a:hover {
+  color: aqua;
   text-decoration: underline;
 }

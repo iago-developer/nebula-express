@@ -39,6 +39,7 @@ body {
     border-radius: 33px;
     box-shadow: 2px 6px 6px #2f2f2fa3;
     overflow: hidden;
+    width: 80%;
 }
 
 .container > .formulario > .form-titulo {

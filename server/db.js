@@ -8,20 +8,4 @@ const conectar = async () => {
     return con;
 };
 
-conectar();
-
-const todosClientes = async () => {
-  const con = await conectar();
-  const [linhas] = await con.query('SELECT * FROM usuarios');
-  
-  return await linhas;
-}
-
-const inserirCliente = async (cliente) => {
-  const con = await conectar();
-  const sql = 'INSERT INTO usuarios(nomeCompleto, nomeUsuario, genero, idade, email, senha) VALUES(?,?,?,?,?,?)';
-  const valores = [cliente.nomeCompleto, cliente.nomeUsuario, cliente.genero, cliente.idade, cliente.email, cliente.senha];
-  await con.query(sql, valores);
-}
-
-module.exports = {todosClientes, inserirCliente};
+module.exports = { conectar };

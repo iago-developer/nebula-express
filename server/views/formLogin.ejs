@@ -5,8 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/formLogin.css" media="all">
+  <script src="javascripts/back.js" defer></script>
   <title>Formulário de Login</title>
-  <script src="/javascripts/botaoBack.js" defer></script>
   <script type="module" defer>
   import Window from "/javascripts/window.js";
     const state = "<%= err %>";
@@ -31,7 +31,7 @@
 </head>
 <body>
   <div class="container">
-    <button onclick="back()">Voltar</button>
+    <button class="botao">Back</button>
     <div class="formulario">
       <div class="form-titulo">
         <h1>Login</h1>

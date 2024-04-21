@@ -5,33 +5,43 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/formCadastro.css" media="all">
+  <script src="javascripts/back.js" defer></script>
   <title>Formulário de Cadastro</title>
-  <script src="/javascripts/botaoBack.js" defer></script>
   <script type="module" defer>
     import Window from "/javascripts/window.js";
     const state = "<%= err %>";
-    if(state) {
+    const errorUser = `Error: Duplicate entry &#39;<%= nomeUsuario %>&#39; for key &#39;nomeUsuario&#39;`;
+    const errorEmail = `Error: Duplicate entry &#39;<%= email %>&#39; for key &#39;email&#39;`;
+    if (state === errorUser) {
       const config = {
         header_content: "Erro!",
-        main_content: "<%= err %>",
+        main_content: "O nome de usuário: <strong><%= nomeUsuario %></strong>, Já está sendo usado por outro usuário!",
         color: "#f67070",
       }
-    Window.config(config);
-    Window.exibir();
-    }else if(state == "erro de senha!") {
+      Window.config(config);
+      Window.exibir();
+    } else if (state === errorEmail) {
+      const config = {
+        header_content: "Erro!",
+        main_content: "O email: <strong><%= email %></strong>, Já está cadastrado no sistema!",
+        color: "#f67070"
+      }
+      Window.config(config);
+      Window.exibir();
+    } else if (state == "erro de senha!") {
       const config = {
         header_content: "Erro!",
         main_content: "as senhas não correspondem!",
         color: "#f67070"
       }
-    Window.config(config);
-    Window.exibir();
+      Window.config(config);
+      Window.exibir();
     }
   </script>
 </head>
 <body>
   <div class="container">
-    <button onclick="back()">Voltar</button>
+    <button class="botao">Back</button>
     <div class="formulario">
       <div class="form-titulo">
         <h1>Cadastro</h1>

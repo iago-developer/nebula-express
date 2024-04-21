@@ -1,13 +1,25 @@
-const banco = require('../db.js');
+const banco = require("../db.js");
 
-banco.connect((err) => {
-  if(err) throw err;
-  const sql = 'SELECT * FROM usuarios;';
-  banco.query(sql, (err, result) => {
-    console.log(result);
-  });
-  banco.end((err) => {
-    if(err) throw err;
-    console.log('Conexao encerrada!');
-  });
-});
+const todosClientes = async () => {
+    const con = await banco.conectar();
+    const [linhas] = await con.query("SELECT * FROM usuarios");
+
+    return await linhas;
+};
+
+const inserirCliente = async cliente => {
+    const con = await banco.conectar();
+    const sql =
+        "INSERT INTO usuarios(nomeCompleto, nomeUsuario, genero, idade, email, senha) VALUES(?,?,?,?,?,?)";
+    const valores = [
+        cliente.nomeCompleto,
+        cliente.nomeUsuario,
+        cliente.genero,
+        cliente.idade,
+        cliente.email,
+        cliente.senha
+    ];
+    await con.query(sql, valores);
+};
+
+module.exports = { todosClientes, inserirCliente };
