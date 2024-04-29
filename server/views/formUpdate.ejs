@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/formCadastro.css" media="all">
+  <script src="javascripts/back02.js" defer></script>
+  <title>Formulário de Atualização</title>
+  <script type="module" defer>
+    import Window from "/javascripts/window.js";
+    const state = "<%= err %>";
+    const errorUser = `Error: Duplicate entry &#39;<%= clienteLogado.nomeUsuario %>&#39; for key &#39;nomeUsuario&#39;`;
+    const errorEmail = `Error: Duplicate entry &#39;<%= clienteLogado.email %>&#39; for key &#39;email&#39;`;
+    if (state === errorUser) {
+      const config = {
+        header_content: "Erro!",
+        main_content: "O nome de usuário: <strong><%= clienteLogado.nomeUsuario %></strong>, Já está sendo usado por outro usuário!",
+        color: "#f67070",
+      }
+      Window.config(config);
+      Window.exibir();
+    } else if (state === errorEmail) {
+      const config = {
+        header_content: "Erro!",
+        main_content: "O email: <strong><%= clienteLogado.email %></strong>, Já está cadastrado no sistema!",
+        color: "#f67070"
+      }
+      Window.config(config);
+      Window.exibir();
+    } else if (state == "erro de senha!") {
+      const config = {
+        header_content: "Erro!",
+        main_content: "as senhas não correspondem!",
+        color: "#f67070"
+      }
+      Window.config(config);
+      Window.exibir();
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <button class="botao">Back</button>
+    <div class="formulario">
+      <div class="form-titulo">
+        <h1>Update</h1>
+      </div>
+      <br />
+    <div class="form-content">
+      <form action="/update" method="POST">
+        <div class="select">
+          <h2 style="display: inline; margin:5px;">Id:</h2>
+          <input type="text" name="id" value="<%= clienteLogado.id%>" readonly required />
+        </div>
+        <br/>
+        <input type="text" class="inputForm" id="nomeCompleto" name="nomeCompleto" placeholder="nome completo" value="<%= clienteLogado.nomeCompleto %>" required><br><br>
+        <input type="text" class="inputForm" id="nomeUsuario" name="nomeUsuario" placeholder="nome de usuário" value="<%= clienteLogado.nomeUsuario %>" required><br><br>
+        <div class="radios">
+          <h3>Gênero</h3><div class="radio_area">
+            <% if(clienteLogado.genero == 'Masculino') {%>
+            <span class="radio"><input type="radio" class="inputForm" id="genero-m" value="Masculino" name="genero" checked required><h5>Masculino</h5></span><span class="radio"><input type="radio" class="inputForm" id="genero-f" value="Feminino" name="genero" required><h5>Feminino</h5></span><% }else {%>            <span class="radio"><input type="radio" class="inputForm" id="genero-m" value="Masculino" name="genero" checked required><h5>Masculino</h5></span><span class="radio"><input type="radio" class="inputForm" id="genero-f" value="Feminino" name="genero" checked required><h5>Feminino</h5></span>
+            <% } %>
+          </div>
+        </div>
+        <br>
+        <input type="number" class="inputForm" id="idade" name="idade" placeholder="idade" value="<%= clienteLogado.idade%>" required><br><br>
+        <input type="text" class="inputForm" id="email" name="email" placeholder="exemplo@gmail.com" value="<%= clienteLogado.email %>" required><br><br>
+        <input type="text" class="inputForm" id="senha" name="senha" placeholder="crie uma senha" value="<%= clienteLogado.senha %>" required><br><br>
+        <input type="text" class="inputForm" id="c-senha" name="c_senha" placeholder="confirme a sua senha" value="<%= clienteLogado.senha%>" required><br><br>
+        <div class="botoes">
+          <button type="button" class="botaoForm" id="botaoDelete">Deletar</button>
+          <button type="reset" class="botaoForm" id="botaoReset">Limpar</button>
+          <button type="submit" class="botaoForm" id="botaoSubmit">Enviar</button>
+        </div>
+      </form>
+    </div>
+    <br />
+  <div class="form-footer">
+    <h1>Update</h1>
+  </div>
+</div>
+</div>
+</body>
+<script>
+ 
+ 
+</script>
+</html>

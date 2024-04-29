@@ -6,7 +6,7 @@
 }
 
 body {
-  background-image: url('../images/fundo.jpg');
+  background-image: url('../images/fundo02.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   height: 100vh;
@@ -34,6 +34,7 @@ body {
   top: 0px;
   left: 0px;
 }
+
 .container > .formulario {
   background-color: #fff;
   border-radius: 33px;

@@ -5,7 +5,7 @@
 }
 
 body {
-  background-image: url('../images/fundo.jpg');
+  background-image: url('../images/fundo02.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   height: 100vh;
@@ -35,21 +35,29 @@ a {
 }
 
 .container > .header-content > h1 {
-  text-shadow: 1px 2px 2px #000;
-  letter-spacing: 1.5px;
+  text-shadow: 2px 4px 4px #000;
+  letter-spacing: 0px;
+  text-align: center;
+  font-size: 2.8rem;
+}
+
+.container > .header-content > h1 > span {
+  color: #0306aa;
 }
 
 .container > .header-content > .links {
   width: 100%;
+  padding-top: 15px;
   display: flex;
   justify-content: center;
 }
 
 .container > .header-content > .links > a {
-  background-color: #1d1d1def;
+  background-color: #0306aa;
   border-radius: 4px;
   color: #fff;
   margin: 5px;
+  margin-left: 30px;
   padding: 5px;
   text-decoration: none;
   transition: all .5s;

@@ -19,9 +19,9 @@ router.get("/", function (req, res, next) {
     });
 });
 
-router.get("/main", (req,res) => {
-  const err = null;
-  res.render("formLogin", { err });
+router.get("/main", (req, res) => {
+    const err = null;
+    res.render("formLogin", { err });
 });
 
 router.get("/formCadastro", (req, res) => {
@@ -30,6 +30,16 @@ router.get("/formCadastro", (req, res) => {
     const email = null;
     res.render("formCadastro", { nomeUsuario, email, err });
 });
+
+router.get("/formUpdate", async (req, res) => {
+    const clientes = await conexao.todosClientes();
+    const id = null;
+    const err = null;
+    const nomeUsuario = null;
+    const email = null;
+    res.render("formUpdate", { clientes, id, nomeUsuario, email, err });
+});
+
 router.get("/formLogin", (req, res) => {
     const err = null;
     res.render("formLogin", { err });
@@ -41,6 +51,7 @@ router.post("/main", async (req, res) => {
     let senha = req.body.senha;
 
     const clientes = await conexao.todosClientes();
+    const todosClientes = await conexao.todosClientes();
     const buscaCliente = cliente =>
         cliente.nomeUsuario == login && cliente.senha == senha;
     const clienteLogado = clientes.find(buscaCliente);
@@ -50,18 +61,101 @@ router.post("/main", async (req, res) => {
         );
         console.log("Acesso concedido!");
         const err = null;
-        res.render("main", { clienteLogado, title:"Nebula", err });
+        res.render("main", {
+            clienteLogado,
+            todosClientes,
+            title: "Nebula",
+            err
+        });
     } else {
         console.log(
             `O usuário ou a senha não está localizado em nosso banco de dados!`
         );
         console.log("Acesso Negado!");
         const err = "error!";
-        res.render("formLogin", { title:"formLogin", err });
+        res.render("formLogin", { title: "formLogin", err });
     }
 });
 
+router.post("/formUpdate", async (req, res) => {
+    try {
+        const clientes = await conexao.todosClientes();
+        const { id, nomeUsuario, email, senha } = req.body;
+        const todosClientes = await conexao.todosClientes();
+        const buscaCliente = cliente => cliente.id == id;
+        const clienteLogado = clientes.find(buscaCliente);
+        if (clienteLogado) {
+            console.log(
+                `O usuário: (${login}) está localizado em nosso banco de dados!`
+            );
+            console.log("Acesso concedido!");
+        }
+        res.render("formUpdate", { clienteLogado, err });
+    } catch (err) {
+        const clientes = await conexao.todosClientes();
+        const { id, nomeUsuario, email, senha } = req.body;
+        const todosClientes = await conexao.todosClientes();
+        const buscaCliente = cliente => cliente.id == id;
+        const clienteLogado = clientes.find(buscaCliente);
+        const cliente = [id, nomeUsuario, email, senha];
+        res.render("formUpdate", { clienteLogado, err });
+    }
+});
 
+router.post("/update", async (req, res) => {
+    try {
+        const { id, nomeCompleto, nomeUsuario, genero, idade, email, senha } =
+            req.body;
+        const clientes = await conexao.todosClientes();
+        const todosClientes = await conexao.todosClientes();
+        const buscaCliente = cliente => cliente.id == id;
+        const clienteLogado = clientes.find(buscaCliente);
+        const cliente = [id, nomeUsuario, email, senha];
+
+        await conexao.atualizarCliente(
+            {
+                nomeCompleto: nomeCompleto,
+                nomeUsuario: nomeUsuario,
+                genero: genero,
+                idade: idade,
+                email: email,
+                senha: senha
+            },
+            id
+        );
+
+        const clientesUpdate = await conexao.todosClientes();
+        console.group("Dados atualizados com sucesso!");
+        console.table(clientesUpdate);
+        console.groupEnd();
+        const err = "safe!";
+        clienteLogado.nomeUsuario = "iago_xd";
+        clienteLogado.senha = "123";
+        res.render("main", {
+            clienteLogado,
+            todosClientes,
+            title: "Nebula",
+            err
+        });
+    } catch (err) {
+        const { id, nomeCompleto, nomeUsuario, genero, idade, email, senha } =
+            req.body;
+        const cliente = [
+            id,
+            nomeCompleto,
+            nomeUsuario,
+            genero,
+            idade,
+            email,
+            senha
+        ];
+        const clientes = await conexao.todosClientes();
+        const todosClientes = await conexao.todosClientes();
+        const buscaCliente = cliente => cliente.id == id;
+        const clienteLogado = clientes.find(buscaCliente);
+        res.render("index", { clienteLogado, nomeUsuario, email, err });
+    }
+});
 router.post("/formLogin", async (req, res) => {
     /* Página de Cadastro */
     try {
