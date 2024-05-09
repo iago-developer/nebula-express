@@ -7,7 +7,7 @@ var conexao = require("../models/Users.js");
 (async () => {
     const clientes = await conexao.todosClientes();
     console.group(`Usuários cadastrados:`);
-    console.table(clientes);
+    console.log(clientes);
     console.groupEnd();
 })();
 
@@ -126,9 +126,9 @@ router.post("/update", async (req, res) => {
 
         const clientesUpdate = await conexao.todosClientes();
         console.group("Dados atualizados com sucesso!");
-        console.table(clientesUpdate);
+        console.log(clientesUpdate);
         console.groupEnd();
-        const err = "safe!";
+        const err = null;
         clienteLogado.nomeUsuario = "iago_xd";
         clienteLogado.senha = "123";
         res.render("main", {
@@ -156,6 +156,23 @@ router.post("/update", async (req, res) => {
         res.render("index", { clienteLogado, nomeUsuario, email, err });
     }
 });
+
+router.post("/delete", async (req, res) => {
+    try {
+        const clientes = await conexao.todosClientes();
+        const { id, nomeUsuario, email, senha } = req.body;
+        const todosClientes = await conexao.todosClientes();
+        const buscaCliente = cliente => cliente.id == id;
+        const clienteLogado = clientes.find(buscaCliente);
+        const err = "reload!";
+        await conexao.deletarCliente(clienteLogado.id);
+
+        res.render("formLogin", { err });
+    } catch (err) {
+        return "Falha ao deletar Cliente!";
+    }
+});
+
 router.post("/formLogin", async (req, res) => {
     /* Página de Cadastro */
     try {

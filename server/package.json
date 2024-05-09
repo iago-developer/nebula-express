@@ -15,7 +15,10 @@
     "mysql2": "^3.9.7"
   },
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "tsc-watch": "^6.2.0",
+    "typescript": "^5.4.5"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
